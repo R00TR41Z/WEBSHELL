@@ -18,3 +18,5 @@
 ## and open the url on browser
 #### http://localhost:8080
 
+* The commmand.php file is to use on your host provider*
+
